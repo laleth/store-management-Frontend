@@ -1,0 +1,1 @@
+export const API = "https://store-management-c7lq.onrender.com"

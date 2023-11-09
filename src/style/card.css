@@ -1,0 +1,44 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card-img {
+    width: 100%; 
+    height: auto; 
+    max-height: 250px; 
+  }
+  .card {
+    background-color: lightgray; /* Set the background color to grey */
+    color: black; /* Set the text color to white */
+    width: 18rem;
+  }
+  
+  .cart-btn {
+    margin-top: 1rem; 
+    display: block; 
+}
+  .card {
+    margin: 1rem;
+    width: 18rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  
+  .card-text {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  
+ 
+  .button {
+    margin-top: 1rem;
+    
+  }
+
+ 

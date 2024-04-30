@@ -4,35 +4,45 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import "../style/billdetails.css";
 import { API } from '../global';
+import { notification } from 'antd';
 
 function BillDetails() {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  
-  // Check if 'data' parameter exists
-  if (!searchParams.has('data')) {
+  const { data } = location.state;
+
+  if (!data) {
     return (
       <div className="bill-details-container">
         <h2>Bill Details</h2>
         <p>No data available</p>
-        <Button variant="primary" href="/">Go to Home</Button>
+        <Button variant="primary" href="/card">Go to Home</Button>
       </div>
     );
   }
 
-  const billData = JSON.parse(searchParams.get('data'));
+  const openNotification = (type, message, description) => {
+    notification[type]({
+      message,
+      description,
+    });
+  };
 
-  // Get the last item from the billData array
-  const lastBill = billData[billData.length - 1];
+
+  const lastBill = data[data.length - 1];
 
   console.log(lastBill);
 
   const handleDeleteBills = async () => {
     try {
-      const response = await axios.delete(`${API}/bills/delete-bills`);
+      const token = localStorage.getItem('Authorization');
+      const response = await axios.delete(`${API}/bills/delete-bills`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
       if (response.status === 200) {
+        openNotification('success', 'Bill Saved Successful', 'Your Bill has been Saved Successfully.');
         console.log('All bills deleted successfully');
-        // You can navigate to home or update state as needed
       }
     } catch (error) {
       console.error('Error deleting bills:', error);
@@ -51,10 +61,9 @@ function BillDetails() {
         <p>Payment Mode: {lastBill.paymentMode}</p>
         <p>Cart Items: {lastBill.cartItems}</p>
         <div className="button-container">
-        <Button variant="danger" onClick={handleDeleteBills}>Delete Bills</Button>
-      <Button variant="primary" href="/">Home</Button>
-      
-    </div>
+          <Button variant="danger" onClick={handleDeleteBills}>Delete Bills</Button>
+          <Button variant="primary" href="/card">Home</Button>
+        </div>
       </div>
     </div>
   );

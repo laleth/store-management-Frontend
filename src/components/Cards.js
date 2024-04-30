@@ -20,7 +20,12 @@ function CardReact({ addToCart }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API}/items/get-items`);
+        const token = localStorage.getItem('Authorization');
+        const response = await axios.get(`${API}/items/get-items`,{
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
         setData(response.data);
         setLoading(false);
       } catch (err) {

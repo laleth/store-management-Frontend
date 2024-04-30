@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 import { API } from '../global';
 import '../style/bill.css';
 import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 
 function Bill({ cart }) {
   const [custname, setCustname] = useState("");
@@ -13,6 +15,7 @@ function Bill({ cart }) {
   const [paymentmode, setPayment] = useState("");
   const [cartItems, setCartitems] = useState("");
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const calculateSubTotal = () => {
     let sum = 0;
@@ -44,6 +47,7 @@ function Bill({ cart }) {
 
   const chargebill = async () => {
     try {
+      const token = localStorage.getItem('Authorization');
       const response = await axios.post(`${API}/bills/charge-bill`, {
         customerName: custname,
         customerPhoneNumber: phone,
@@ -52,6 +56,10 @@ function Bill({ cart }) {
         subTotal: subTotal,
         paymentMode: paymentmode,
         cartItems: cartItems
+      },{
+        headers: {
+          Authorization: `${token}`,
+        },
       });
       if (response.status === 200) {
         openNotification('success', 'Bill Saved Successful', 'Your Bill has been Saved Successfully.');
@@ -66,11 +74,17 @@ function Bill({ cart }) {
 
   const getBill = async () => {
     try {
-      const response = await axios.get(`${API}/bills/get-bill`);
+      const token = localStorage.getItem('Authorization');
+      const response = await axios.get(`${API}/bills/get-bill`,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      if(response.status===200){
       const billData = response.data;
-      
-      window.location.href = `/bill-details?data=${JSON.stringify(billData)}`;
-      
+      navigate('/bill-details', { state: { data: billData } });
+      // window.location.href = `/bill-details?data=${JSON.stringify(billData)}`;
+      }
     } catch (error) {
       console.error('Error retrieving bill:', error);
       openNotification('error', 'Bill Retrieval Error', 'There was an error retrieving the bill.');

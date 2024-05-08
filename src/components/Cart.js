@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "../style/cart.css";
 import { Button } from 'react-bootstrap';
 import Bill from './Bill';
+import NavbarReact from './Navbar';
 
 
 function Cart({ cart }) {
@@ -29,8 +30,9 @@ function Cart({ cart }) {
   }
 
   return (
+    <div>
+      <NavbarReact/>
     <div className='myCart'>
-
       <h2>My Cart</h2>
       {!cart || cart.length === 0 ? (
         <p>Cart is Empty</p>
@@ -72,6 +74,7 @@ function Cart({ cart }) {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }

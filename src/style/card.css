@@ -10,8 +10,8 @@
     max-height: 250px; 
   }
   .card {
-    background-color: lightgray; /* Set the background color to grey */
-    color: black; /* Set the text color to white */
+    background-color: lightgray;
+    color: black; 
     width: 18rem;
   }
   
@@ -36,9 +36,9 @@
   }
   
  
-  .button {
+  .button,.crd-btn {
     margin-top: 1rem;
-    
+    margin-right: 0.5rem; 
   }
 
  

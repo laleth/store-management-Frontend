@@ -1,0 +1,52 @@
+.additem-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+  }
+
+  h2{
+    color: #fff;
+  }
+  
+  .additem-form {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .additem-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .additem-form label {
+    margin-bottom: 10px;
+    
+    color: white;
+  }
+  
+  .additem-form input,
+  .additem-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .additem-form button {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .additem-form button:hover {
+    background-color: #0056b3;
+  }
+  

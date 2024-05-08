@@ -1,13 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes,Route,Navigate } from 'react-router-dom';
-import NavbarReact from './components/Navbar';
 import Cart from './components/Cart';
 import CardReact from './components/Cards';
 import { useState } from 'react';
 import Bill from './components/Bill';
 import BillDetails from './components/Billdetails';
 import Login from './components/Login';
+import Additem from './components/Additem';
 
 
 
@@ -22,7 +22,6 @@ function App() {
   };
   return (
     <div className="App">
-    <NavbarReact/>
     <Router>
       <Routes>
       <Route
@@ -36,6 +35,10 @@ function App() {
         <Route
             path="/cart"
             element={authenticated ? <Cart  cart={cart}/> : <Navigate to="/" />}
+          />
+          <Route
+            path="/add-item"
+            element={authenticated ? <Additem/> : <Navigate to="/" />}
           />
           <Route
             path="/bill"
